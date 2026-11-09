@@ -1,5 +1,4 @@
-**Data sources
-**
+**Data Sources**
 
 **Election results** (data/raw), released under CC0 1.0:
 - MIT Election Data and Science Lab, "U.S. Senate statewide 1976-2024", Harvard Dataverse, https://doi.org/10.7910/DVN/PEJ5QU

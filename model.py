@@ -20,12 +20,12 @@ def score(actual, predicted) -> dict[str, float]:
     results = {}
     n = len(predicted)
     assert n > 0, "N is zero"
-    results['n'] = float(n)
+    results['n'] = int(n)
 
     #get races with wrong sign
     mults = actual * predicted
     wrong_sign = np.sum(mults <= 0)
-    results['wrong_sign'] = float(wrong_sign)
+    results['wrong_sign'] = int(wrong_sign)
 
     rmse = root_mean_squared_error(actual, predicted)
     results['rmse'] = rmse
@@ -35,3 +35,16 @@ def score(actual, predicted) -> dict[str, float]:
 
     return results
 
+
+
+def baseline_score(df: pd.DataFrame) -> dict[str, float]: #just test previous margin
+    validation_df = df[df['year'].isin(VALIDATION_YEARS)]
+    actual = validation_df['margin']
+    predicted = validation_df['prev_margin']
+    return score(actual, predicted)
+
+
+if __name__ == "__main__":
+    #baseline
+    senate_df = pd.read_csv('data/processed/senate_races.csv')
+    print(baseline_score(senate_df))
